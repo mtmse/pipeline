@@ -29,6 +29,8 @@
     <module>mysql</module>
     <module>saxon</module>
     <module>servlet-api</module>
+    <module>parboiled</module>
+    <module>pegdown</module>
   </modules>
 
 </project>
