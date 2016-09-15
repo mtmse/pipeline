@@ -64,6 +64,11 @@ maven-install : .maven-modules-install
 		echo "All modules are up to date" >&2; \
 	fi
 
+maven-install : updater/build/bin
+updater/build/bin :
+	cd updater && \
+	make dist
+
 maven-install maven-test : gradle-install
 
 .PHONY : gradle-install

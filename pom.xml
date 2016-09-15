@@ -27,6 +27,9 @@
     <module>modules/scripts</module>
     <module>modules/tts</module>
     <module>modules/audio</module>
+    <module>gui</module>
+    <module>updater</module>
+    <module>updater-gui</module>
   </modules>
   
   <build>
