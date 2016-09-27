@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/mtmse/pipeline-mod-mtm.git
+	branch = master
+	commit = a571cd52d4221383e516dc8a75d2a884f67e7b7c
+	parent = 53d2c01eb409ede142334b60ae454c6cdb17fb87
+	cmdver = 0.3.0
