@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/mtmse/pipeline-mod-mtm.git
 	branch = master
-	commit = a571cd52d4221383e516dc8a75d2a884f67e7b7c
-	parent = 53d2c01eb409ede142334b60ae454c6cdb17fb87
+	commit = d30c7ba6365046ea78df6cb41eda132818f97911
+	parent = b5a8f5eed4805c5cd6a558455c2a9701e83b6d62
 	cmdver = 0.3.0
