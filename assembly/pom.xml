@@ -107,7 +107,7 @@
       <dependency>
         <groupId>org.daisy.pipeline.modules.braille</groupId>
         <artifactId>mod-mtm</artifactId>
-        <version>1.7.0</version>
+        <version>1.7.1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -34,6 +34,7 @@
     <module>gui</module>
     <module>updater/cli</module>
     <module>updater/gui</module>
+    <module>modules/mtm/braille</module>
   </modules>
   
   <build>
