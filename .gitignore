@@ -8,5 +8,8 @@
 /.gradle-modules
 /.gradle-settings/
 .DS_Store
+.maven-test
+.maven-test-dependents
+.maven-install
 /*.zip
 /*.deb
