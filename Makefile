@@ -1,10 +1,11 @@
-POMS := $(shell find * -name pom.xml)
+POMS := $(shell find * -name pom.xml ! -path '*/target/*')
 GRADLE_FILES := $(shell find * -name build.gradle -o -name settings.gradle -o -name gradle.properties)
 
 MVN_WORKSPACE := $(CURDIR)/.maven-workspace
 MVN_CACHE := $(CURDIR)/.maven-cache
 
-MVN := mvn --settings "$(CURDIR)/settings.xml" -Dworkspace="$(MVN_WORKSPACE)" -Dcache="$(MVN_CACHE)"
+MVN := mvn --settings "$(CURDIR)/settings.xml" -Dworkspace="$(MVN_WORKSPACE)" -Dcache="$(MVN_CACHE)" \
+           -Dorg.ops4j.pax.url.mvn.localRepository="$(MVN_WORKSPACE)"
 GRADLE := M2_HOME=$(CURDIR)/.gradle-settings libs/dotify/dotify.api/gradlew -Dworkspace="$(MVN_WORKSPACE)" -Dcache="$(MVN_CACHE)"
 
 MVN_LOG := tee -a $(CURDIR)/maven.log | cut -c1-1000 | pcregrep -M "^\[INFO\] -+\n\[INFO\] Building .*\n\[INFO\] -+$$|^\[(ERROR|WARNING)\]"; \
@@ -16,9 +17,31 @@ SHELL := /bin/bash
 all : compile check dist
 
 .PHONY : dist
-dist : compile
+dist: dist-zip dist-deb
+
+.PHONY : dist-zip
+dist-zip : compile
+	cd assembly && \
+	$(MVN) clean package -Plinux,mac,win | $(MVN_LOG)
+	mv assembly/target/*.zip .
+
+.PHONY : dist-deb
+dist-deb : compile
 	cd assembly && \
 	$(MVN) clean package -Pdeb | $(MVN_LOG)
+	mv assembly/target/*.deb .
+
+.PHONY : run
+run : compile
+	cd assembly && \
+	$(MVN) clean package -Pdev-launcher | $(MVN_LOG)
+	rm assembly/target/dev-launcher/etc/*windows*
+	if [ "$$(uname)" == Darwin ]; then \
+		rm assembly/target/dev-launcher/etc/*linux*; \
+	else \
+		rm assembly/target/dev-launcher/etc/*mac*; \
+	fi
+	assembly/target/dev-launcher/bin/pipeline2
 
 .PHONY : check
 check : gradle-test maven-test
@@ -114,7 +137,8 @@ gradle-install : .gradle-install
 		dest="$(MVN_WORKSPACE)/$$(echo $$g |tr . /)/$$a/$$v" && \
 		if [[ ! -e "$$dest/$$a-$$v.pom" ]] || \
 		   [[ ! -e "$$dest/maven-metadata-local.xml" ]] || \
-		   [[ -n $$(find $$module/{pom.xml,src} -newer "$$dest/maven-metadata-local.xml" 2>/dev/null) ]]; then \
+		   [[ -n $$(find $$module/{pom.xml,src} -newer "$$dest/maven-metadata-local.xml" 2>/dev/null) ]] || \
+		   [[ -n $$(find $$module -name '*.go' -newer "$$dest/maven-metadata-local.xml" 2>/dev/null) ]]; then \
 			touch $$module/.maven-{install,test}; \
 		fi \
 	done
@@ -245,6 +269,7 @@ gradle-test gradle-install maven-test maven-install bom.xml : workspace
 workspace : $(MVN_WORKSPACE)
 
 $(MVN_WORKSPACE) :
+	mkdir -p $(MVN_CACHE)
 	cp -r $(MVN_CACHE) $@
 
 .PHONY : cache
@@ -260,9 +285,27 @@ clean : cache
 	rm -rf $(MVN_WORKSPACE)
 	rm -f .maven-modules .maven-modules-install .maven-modules-test .maven-modules-test-dependents maven.log bom.xml
 	rm -f .gradle-install .gradle-test
+	rm -f *.zip *.deb
 	find * -name .maven-install -exec rm -r "{}" \;
 	find * -name .maven-test -exec rm -r "{}" \;
 	find * -name .maven-test-dependents -exec rm -r "{}" \;
+
+.PHONY : help
+help :
+	echo "make all:"                                                                                >&2
+	echo "	Incrementally compile and test code and package into a ZIP for each platform and a DEB" >&2
+	echo "make compile:"                                                                            >&2
+	echo "	Incrementally compile code"                                                             >&2
+	echo "make check:"                                                                              >&2
+	echo "	Incrementally compile and test code"                                                    >&2
+	echo "make dist:"                                                                               >&2
+	echo "	Incrementally compile code and package into a ZIP for each platform and a DEB"          >&2
+	echo "make dist-zip:"                                                                           >&2
+	echo "	Incrementally compile code and package into a ZIP for each platform"                    >&2
+	echo "make dist-deb:"                                                                           >&2
+	echo "	Incrementally compile code and package into a DEB"                                      >&2
+	echo "make run:"                                                                                >&2
+	echo "	Incrementally compile code and run locally"                                             >&2
 
 ifndef VERBOSE
 .SILENT:
