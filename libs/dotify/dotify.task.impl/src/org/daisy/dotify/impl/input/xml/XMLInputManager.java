@@ -26,9 +26,10 @@ import org.daisy.dotify.common.io.ResourceLocatorException;
 import org.daisy.dotify.common.xml.XMLInfo;
 import org.daisy.dotify.common.xml.XMLTools;
 import org.daisy.dotify.common.xml.XMLToolsException;
+import org.daisy.dotify.impl.input.DuplicatorTask;
 import org.daisy.dotify.impl.input.Keys;
 import org.daisy.dotify.impl.input.ValidatorTask;
-import org.daisy.dotify.impl.input.XsltTask;
+import org.daisy.dotify.tasks.tools.XsltTask;
 
 /**
  * <p>Provides a method to determine the input format and load the 
@@ -59,6 +60,10 @@ import org.daisy.dotify.impl.input.XsltTask;
  *
  */
 public class XMLInputManager implements TaskGroup {
+	/**
+	 * Specifies a location where the intermediary obfl output should be stored
+	 */
+	static final String OBFL_OUTPUT_LOCATION = "obfl-output-location";
 	private final static String TEMPLATES_PATH = "templates/";
 	private final static String LOCALIZATION_PROPS = "localization.xml";
 	private final ResourceLocator localLocator;
@@ -100,7 +105,11 @@ public class XMLInputManager implements TaskGroup {
 		
 		List<InternalTask> ret = new ArrayList<>();
 		ret.add(new XMLExpandingTask(template, makeXSLTParams(parameters)));
-		
+
+		String keep = (String)parameters.get(OBFL_OUTPUT_LOCATION);
+		if (keep!=null && !"".equals(keep)) {
+			ret.add(new DuplicatorTask("OBFL archiver", new File(keep)));
+		}
 		return ret;
 	}
 	
@@ -142,10 +151,11 @@ public class XMLInputManager implements TaskGroup {
 		public List<InternalTask> resolve(AnnotatedFile input) throws InternalTaskException {
 			//String input = parameters.get(Keys.INPUT).toString();
 			String inputformat = null;
+			String rootElement = null;
 			try {
 				XMLInfo peekResult = XMLTools.parseXML(input.getFile(), true);
 				String rootNS = peekResult.getUri();
-				String rootElement = peekResult.getLocalName();
+				rootElement = peekResult.getLocalName();
 				DefaultInputUrlResourceLocator p = DefaultInputUrlResourceLocator.getInstance();
 
 				inputformat = p.getConfigFileName(rootElement, rootNS);
@@ -162,32 +172,32 @@ public class XMLInputManager implements TaskGroup {
 			String basePath = TEMPLATES_PATH + template + "/";
 			if (inputformat!=null) {
 				try {
-					return readConfiguration(localLocator, basePath + inputformat);
+					return readConfiguration(rootElement, localLocator, basePath + inputformat);
 				} catch (ResourceLocatorException e) {
 					logger.fine("Cannot find localized URL " + basePath + inputformat);
 				}
 			}
 			try {
-				return readConfiguration(localLocator, basePath + xmlformat);
+				return readConfiguration(rootElement, localLocator, basePath + xmlformat);
 			} catch (ResourceLocatorException e) {
 				logger.fine("Cannot find localized URL " + basePath + xmlformat);
 			}
 			if (inputformat!=null) {
 				try {
-					return readConfiguration(commonLocator, basePath + inputformat);
+					return readConfiguration(rootElement, commonLocator, basePath + inputformat);
 				} catch (ResourceLocatorException e) {
 					logger.fine("Cannot find common URL " + basePath + inputformat);
 				}
 			}
 			try {
-				return readConfiguration(commonLocator, basePath + xmlformat);
+				return readConfiguration(rootElement, commonLocator, basePath + xmlformat);
 			} catch (ResourceLocatorException e) {
 				logger.fine("Cannot find common URL " + basePath + xmlformat);
 			}
 			throw new InternalTaskException("Unable to open a configuration stream for the format.");
 		}
 		
-		private List<InternalTask> readConfiguration(ResourceLocator locator, String path) throws InternalTaskException, ResourceLocatorException {
+		private List<InternalTask> readConfiguration(String type, ResourceLocator locator, String path) throws InternalTaskException, ResourceLocatorException {
 			URL t = locator.getResource(path);
 			List<InternalTask> setup = new ArrayList<>();				
 			try {
@@ -199,8 +209,8 @@ public class XMLInputManager implements TaskGroup {
 					logger.log(Level.FINE, "Cannot open stream: " + t.getFile(), e);
 					throw new ResourceLocatorException("Cannot open stream");
 				}
-				addValidationTask(removeSchemas(pa, "validation"), setup, locator);
-				addXsltTask(removeSchemas(pa, "transformation"), setup, locator); 
+				addValidationTask(type, removeSchemas(pa, "validation"), setup, locator);
+				addXsltTask(type, removeSchemas(pa, "transformation"), setup, locator); 
 				for (Object key : pa.keySet()) {
 					logger.info("Unrecognized key: " + key);							
 				}
@@ -216,21 +226,21 @@ public class XMLInputManager implements TaskGroup {
 			return resolve(new DefaultAnnotatedFile.Builder(input).build());
 		}
 		
-		private void addValidationTask(String[] schemas, List<InternalTask> setup, ResourceLocator locator) throws ResourceLocatorException {
+		private void addValidationTask(String type, String[] schemas, List<InternalTask> setup, ResourceLocator locator) throws ResourceLocatorException {
 			if (schemas!=null) {
 				for (String s : schemas) {
 					if (s!=null && s!="") {
-						setup.add(new ValidatorTask("Conformance checker: " + s, locator.getResource(s)));
+						setup.add(new ValidatorTask(type + " conformance checker: " + s, locator.getResource(s)));
 					}
 				}
 			} 
 		}
 		
-		private void addXsltTask(String[] schemas, List<InternalTask> setup, ResourceLocator locator) throws ResourceLocatorException {
+		private void addXsltTask(String type, String[] schemas, List<InternalTask> setup, ResourceLocator locator) throws ResourceLocatorException {
 			if (schemas!=null) {
 				for (String s : schemas) {
 					if (s!=null && s!="") {
-						setup.add(new XsltTask("XML to OBFL converter: " + s, locator.getResource(s), xsltParams));
+						setup.add(new XsltTask(type + " to OBFL converter: " + s, locator.getResource(s), xsltParams));
 					}
 				}
 			}
@@ -248,7 +258,9 @@ public class XMLInputManager implements TaskGroup {
 
 	@Override
 	public List<TaskOption> getOptions() {
-		return null;
+		List<TaskOption> ret = new ArrayList<>();
+		ret.add(new TaskOption.Builder(OBFL_OUTPUT_LOCATION).description("Path to store intermediary OBFL-file.").build());
+		return ret;
 	}
 
 }

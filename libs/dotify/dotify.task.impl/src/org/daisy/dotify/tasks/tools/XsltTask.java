@@ -1,4 +1,4 @@
-package org.daisy.dotify.impl.input;
+package org.daisy.dotify.tasks.tools;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -57,7 +57,7 @@ public class XsltTask extends ReadWriteTask {
 		List<TaskOption> ret = new ArrayList<>();
 		try {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			XMLTools.transform(url, os, this.getClass().getResource("resource-files/list-params.xsl"), new HashMap<String, Object>());
+			XMLTools.transform(url, os, this.getClass().getResource("resource-files/list-params.xsl"), new HashMap<String, Object>(),  new net.sf.saxon.TransformerFactoryImpl());
 			Properties px = new Properties();
 			px.loadFromXML(new ByteArrayInputStream(os.toByteArray()));
 			for (Entry<Object, Object> entry : px.entrySet()) {

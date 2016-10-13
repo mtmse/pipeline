@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/brailleapps/dotify.task.impl
 	branch = master
-	commit = 472a9887ea063301e77f44d4a5c40bcd46535703
-	parent = f5d2d655fec4a4679752c63440abcc785d309557
+	commit = 92ad696903c87451cce93cab9ae3d708c4c397be
+	parent = bbde59c9afbec81f1f749d84801b762470399ccd
 	cmdver = 0.3.0
