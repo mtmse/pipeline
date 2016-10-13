@@ -46,6 +46,10 @@ run : compile
 .PHONY : check
 check : gradle-test maven-test
 
+check-mtm : compile
+	cd modules/mtm/braille && \
+	$(MVN) clean test
+
 .PHONY : compile
 compile : gradle-install maven-install
 
