@@ -185,6 +185,7 @@ public class FileToOBFLStep extends DefaultStep {
 		
 		// Run tasks
 		TaskRunner runner = TaskRunner.withName("dotify:file-to-obfl").build();
+		// FIXME: java.lang.NoSuchMethodError
 		runner.runTasks(src, dest, tasks);
 		
 		// Return stream
