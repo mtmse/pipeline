@@ -13,3 +13,6 @@
 .maven-install
 /*.zip
 /*.deb
+.project
+.settings
+.maven-modules-install

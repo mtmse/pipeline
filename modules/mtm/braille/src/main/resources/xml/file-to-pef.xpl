@@ -14,6 +14,14 @@
         <p px:role="desc">Transforms a DTBook (DAISY 3 XML) document into a PEF.</p>
     </p:documentation>
     
+    <p:output port="validation-status" px:media-type="application/vnd.pipeline.status+xml">
+        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+            <h1 px:role="name">Validation status</h1>
+            <p px:role="desc">Validation status (http://code.google.com/p/daisy-pipeline/wiki/ValidationStatusXML).</p>
+        </p:documentation>
+        <p:pipe port="validation-status" step="validate-pef"/>
+    </p:output>
+    
     <!-- ============ -->
     <!-- Main options -->
     <!-- ============ -->
@@ -549,8 +557,8 @@ When disabled, images will only be rendered if they have a prodnote.</p>
         </p:input>
     </p:xslt>
     
-    <pef:validate>
-    	<p:with-option name="assert-valid" select="'true'"/>
+    <pef:validate name="validate-pef">
+    	<p:with-option name="assert-valid" select="'false'"/>
     	<p:with-option name="temp-dir" select="$temp-dir"/>
     </pef:validate>
     
