@@ -1,0 +1,40 @@
+apply plugin: 'se.mtm.artifactory-rpm'
+
+buildscript {
+    repositories {
+        maven {
+            url "http://artifactory.mtm.se:8081/artifactory/libs-both"
+        }
+    }
+    dependencies {
+        classpath 'se.mtm.gradle:gradle-artifactory-rpm-plugin:1.0.20'
+    }
+}
+
+def getPomVersion() {
+	def pomns = new groovy.xml.Namespace("http://maven.apache.org/POM/4.0.0")
+	def pom = new XmlParser().parse(file('pom.xml'))
+	return pom[pomns.version].text()
+}
+
+version = getPomVersion() + "-1"
+
+task printVersion() << {
+	println version
+}
+
+artifactoryRpm {
+	distributionDir = "target/rpm/pipeline2/RPMS/x86_64"
+	packageName = "pipeline2"
+}
+
+task copyRpm(type: Copy) {
+	from 'target/rpm/pipeline2/RPMS/x86_64'
+	into 'build/distributions'
+}
+
+promoteToStageRepo.dependsOn copyRpm
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}

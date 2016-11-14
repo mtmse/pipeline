@@ -79,7 +79,7 @@
       <dependency>
         <groupId>org.daisy.pipeline.modules.braille</groupId>
         <artifactId>braille-modules-bom</artifactId>
-        <version>1.9.16-SNAPSHOT</version>
+        <version>1.9.17-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -108,6 +108,21 @@
         <groupId>org.daisy.pipeline.modules.braille</groupId>
         <artifactId>mod-mtm</artifactId>
         <version>1.8.0</version>
+      </dependency>
+      <dependency>
+        <groupId>se.mtm.addons</groupId>
+        <artifactId>mtm-dotify-addons</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.daisy.dotify</groupId>
+        <artifactId>dotify.task.impl</artifactId>
+		<version>2.12.0</version>
+      </dependency>
+	  <dependency>
+        <groupId>org.daisy.dotify</groupId>
+        <artifactId>dotify.formatter.impl</artifactId>
+		<version>2.7.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -550,6 +565,10 @@
                 <artifactItem>
                   <groupId>org.unbescape</groupId>
                   <artifactId>unbescape</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>se.mtm.addons</groupId>
+                  <artifactId>mtm-dotify-addons</artifactId>
                 </artifactItem>
               </artifactItems>
             </configuration>
@@ -1108,6 +1127,10 @@
                 </artifactItem>
                 <artifactItem>
                   <groupId>org.daisy.pipeline.modules.braille</groupId>
+                  <artifactId>mod-mtm</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.daisy.pipeline.modules.braille</groupId>
                   <artifactId>pef-calabash</artifactId>
                 </artifactItem>
                 <artifactItem>
@@ -1142,10 +1165,6 @@
                   <groupId>org.daisy.pipeline.modules.braille</groupId>
                   <artifactId>zedai-to-pef</artifactId>
                 </artifactItem>
-		<artifactItem>
-		  <groupId>org.daisy.pipeline.modules.braille</groupId>
-		  <artifactId>mod-mtm</artifactId>
-		</artifactItem>
               </artifactItems>
             </configuration>
           </execution>
@@ -2108,6 +2127,7 @@
         <bundles.auto.deploy>system/felix</bundles.auto.deploy> <!-- don't change! must be the same as in dist.properties -->
         <bundles.bootstrap>system/bootstrap</bundles.bootstrap> <!-- don't change! must be the same as in dist.properties -->
         <bundles.modules>modules</bundles.modules> <!-- don't change! must be the same as in dist.properties -->
+        <pipeline.log.jobappender>org.daisy.pipeline.logging.IgnoreSiftAppender</pipeline.log.jobappender>
       </properties>
       <build>
         <plugins>
@@ -2121,7 +2141,7 @@
                   <goal>single</goal>
                 </goals>
                 <configuration>
-                  <formats>dir</formats>
+                  <!-- <formats>dir</formats> -->
                   <descriptors>
                     <descriptor>src/main/assembly/dist-linux.xml</descriptor>
                   </descriptors>
@@ -2207,6 +2227,7 @@
                         <include>etc/system.properties</include>
                         <include>etc/config.properties</include>
                         <include>etc/org.apache.felix.fileinstall-modules.cfg</include>
+						<include>etc/config-logback.xml</include>
                       </includes>
                       <filter>true</filter>
                     </source>
@@ -2621,5 +2642,11 @@ rm -rf /opt/daisy-pipeline2/cli
       <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
       <url>http://repository.springsource.com/maven/bundles/external</url>
     </repository>
+    <!-- staging address for mod-mtm modules -->
+    <repository>
+		<id>sonatype-nexus-staging-not-released</id>
+        <name>Nexus Release Repository</name>
+        <url>http://oss.sonatype.org/content/groups/staging/</url>
+      </repository>
   </repositories>
 </project>
