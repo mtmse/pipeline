@@ -2253,7 +2253,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/${bundles.bootstrap}</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
@@ -2264,7 +2264,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/${bundles.auto.deploy}</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
@@ -2278,7 +2278,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/${bundles.auto.deploy}/gogo</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
@@ -2292,7 +2292,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/system/framework</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
@@ -2303,7 +2303,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/system/framework</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
@@ -2314,7 +2314,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/system/frontend</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
@@ -2325,7 +2325,7 @@
                 </mapping>
                 <mapping>
                   <directory>${pipeline.home}/${bundles.modules}</directory>
-                  <filemode>0644</filemode>
+                  <filemode>0755</filemode>
                   <username>${pipeline.user}</username>
                   <groupname>${pipeline.group}</groupname>
                   <sources>
