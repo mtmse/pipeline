@@ -1276,10 +1276,10 @@
                 <configuration>
                   <target>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-release.xslt"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-release.xslt"/>
                       <arg value="time=${maven.build.timestamp}"/>
-                      <arg line="-o:./target/release-descriptor/releaseDescriptor.xml"/>
+                      <arg line="-o:${project.basedir}/target/release-descriptor/releaseDescriptor.xml"/>
                     </java>
                   </target>
                 </configuration>
@@ -1621,8 +1621,8 @@
                 <configuration>
                   <target>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-pipeline-bundles"/>
                       <arg value="startLevel=30"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc"/>
@@ -1630,8 +1630,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-pipeline-modules"/>
                       <arg value="startLevel=50"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc"/>
@@ -1639,8 +1639,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-pipeline-modules-linux"/>
                       <arg value="startLevel=50"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc"/>
@@ -1648,8 +1648,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-frontend"/>
                       <arg value="startLevel=100"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc/webservice"/>
@@ -1657,8 +1657,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-pipeline-modules-mac"/>
                       <arg value="startLevel=50"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc"/>
@@ -1666,8 +1666,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-pipeline-modules-win"/>
                       <arg value="startLevel=50"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc"/>
@@ -1675,8 +1675,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-gui"/>
                       <arg value="startLevel=100"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc/gui"/>
@@ -1684,8 +1684,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-volatile-pipeline-bundles"/>
                       <arg value="startLevel=100"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc/gui"/>
@@ -1693,8 +1693,8 @@
                       <arg value="localRepository=${settings.localRepository}"/>
                     </java>
                     <java classname="net.sf.saxon.Transform">
-                      <arg value="target/tmp/effective-pom.xml"/>
-                      <arg value="src/main/xslt/pom-to-fileinstall-config.xsl"/>
+                      <arg value="${project.baseUri}/target/tmp/effective-pom.xml"/>
+                      <arg value="${project.baseUri}/src/main/xslt/pom-to-fileinstall-config.xsl"/>
                       <arg value="id=copy-persistence-pipeline-bundles"/>
                       <arg value="startLevel=100"/>
                       <arg value="dest=${project.baseUri}/target/generated-resources/etc/webservice"/>
