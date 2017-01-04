@@ -203,9 +203,8 @@ Must be the letter "P" and 5 digits.</p>
     <p:option name="include-captions" required="false" px:type="boolean" select="'false'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Block elements: Include image captions</h2>
-            <p px:role="desc">When enabled, will include captions for images.
-
-When disabled, images will only be rendered if they have a prodnote.</p>
+            <p px:role="desc">DTBook only: When enabled, will include captions for images. When disabled, images will only be rendered if they have a prodnote. 
+            Note that this option only works when mtm-addons are applied (see "Other" options).</p>
         </p:documentation>
     </p:option>
     <!--
@@ -225,8 +224,7 @@ When disabled, images will only be rendered if they have a prodnote.</p>
     <p:option name="merge-line-groups" required="false" px:type="boolean" select="'false'">
         <p:documentation xmlns="http://www.w3.org/1999/xhtml">
             <h2 px:role="name">Block elements: Merge line groups</h2>
-            <p px:role="desc">When enabled, lines in a linegroup are merged into a single paragraph, unless the line starts with a dash. 
-		Note that this option only works when mtm-addons are applied (see advanced options) and only for DTBook.</p>
+            <p px:role="desc">Dtbook only: When enabled, lines in a linegroup are merged into a single paragraph, unless the line starts with a dash.</p>
         </p:documentation>
     </p:option>
     
