@@ -2634,11 +2634,17 @@ rm -rf /opt/daisy-pipeline2/cli
       <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
       <url>http://repository.springsource.com/maven/bundles/external</url>
     </repository>
-    <!-- staging address for mod-mtm modules -->
+    <!-- Sonatype staging repository (used for artifacts not yet released) -->
     <repository>
 		<id>sonatype-nexus-staging-not-released</id>
         <name>Nexus Release Repository</name>
         <url>http://oss.sonatype.org/content/groups/staging/</url>
-      </repository>
+        <releases>
+        	<enabled>true</enabled>
+        </releases>
+        <snapshots>
+        	<enabled>false</enabled>
+        </snapshots>
+    </repository>
   </repositories>
 </project>
