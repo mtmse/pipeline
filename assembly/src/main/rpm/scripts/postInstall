@@ -1,0 +1,15 @@
+#!/bin/bash
+
+USER=pipeline2
+HOME=/opt/daisy-pipeline2
+DATA=/var/opt/daisy-pipeline2
+LOG=/var/log/daisy-pipeline2
+
+mkdir -p ${DATA}
+mkdir -p ${LOG}
+chown -R ${USER}:${USER} ${HOME}
+chown -R ${USER}:${USER} ${DATA}
+chown -R ${USER}:${USER} ${LOG}
+
+touch ${LOG}/pipeline2.log
+chown ${USER}:${USER} ${LOG}/pipeline2.log

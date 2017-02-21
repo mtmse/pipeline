@@ -2436,9 +2436,11 @@
     <profile>
       <id>rpm</id>
       <properties>
-        <pipeline.user>root</pipeline.user>
-        <pipeline.group>root</pipeline.group>
+        <pipeline.user>pipeline2</pipeline.user>
+        <pipeline.group>pipeline2</pipeline.group>
         <pipeline.home>/opt/daisy-pipeline2</pipeline.home>
+        <pipeline.data>/var/opt/daisy-pipeline2</pipeline.data>
+        <pipeline.log>/var/log/daisy-pipeline2</pipeline.log>
         <bundles.auto.deploy>system/felix</bundles.auto.deploy> <!-- don't change! must be the same as in dist.properties -->
         <bundles.bootstrap>system/bootstrap</bundles.bootstrap> <!-- don't change! must be the same as in dist.properties -->
         <bundles.modules>modules</bundles.modules> <!-- don't change! must be the same as in dist.properties -->
@@ -2556,6 +2558,18 @@
                   </sources>
                 </mapping>
                 <mapping>
+                  <directory>${pipeline.home}/bin</directory>
+                  <filemode>0550</filemode>
+                  <username>${pipeline.user}</username>
+                  <groupname>${pipeline.group}</groupname>
+                  <sources>
+				    <source>
+				      <location>${project.basedir}/src/main/rpm/cfg/redhat.cfg</location>
+				      <destination>redhat.cfg</destination>
+				    </source>
+				  </sources>
+                </mapping>
+                <mapping>
                   <directory>${pipeline.home}/${bundles.bootstrap}</directory>
                   <filemode>0644</filemode>
                   <username>${pipeline.user}</username>
@@ -2660,14 +2674,41 @@
                     </source>
                   </sources>
                 </mapping>
+                <mapping>
+                  <directory>/etc/init.d</directory>
+                  <directoryIncluded>false</directoryIncluded>
+                  <username>${pipeline.user}</username>
+                  <groupname>${pipeline.group}</groupname>
+                  <filemode>0755</filemode>
+                  <sources>
+				    <source>
+				      <location>${project.basedir}/src/main/rpm/etc/init.d/pipeline2d</location>
+				      <destination>pipeline2d</destination>
+				    </source>
+				  </sources>
+                </mapping>
               </mappings>
               <filters>
                 <filter>src/main/assembly/dist.properties</filter>
                 <filter>src/main/assembly/dist-nix.properties</filter>
               </filters>
+              <preinstallScriptlet>
+                <scriptFile>src/main/rpm/scripts/preInstall</scriptFile>
+                <fileEncoding>utf-8</fileEncoding>
+              </preinstallScriptlet>
+              <postinstallScriptlet>
+                <scriptFile>src/main/rpm/scripts/postInstall</scriptFile>
+                <fileEncoding>utf-8</fileEncoding>
+              </postinstallScriptlet>
+              <preremoveScriptlet>
+                <scriptFile>src/main/rpm/scripts/preUninstall</scriptFile>
+                <fileEncoding>utf-8</fileEncoding>
+              </preremoveScriptlet>
               <postremoveScriptlet>
                 <script>
-rm -rf /opt/daisy-pipeline2
+				  rm -rf /opt/daisy-pipeline2
+				  rm -rf ${pipeline.log}
+				  rm -f /tmp/dp2key.txt
                 </script>
               </postremoveScriptlet>
             </configuration>
@@ -2759,7 +2800,7 @@ rm -rf /opt/daisy-pipeline2
               </mappings>
               <postremoveScriptlet>
                 <script>
-rm -rf /opt/daisy-pipeline2/cli
+					rm -rf /opt/daisy-pipeline2/cli
                 </script>
               </postremoveScriptlet>
             </configuration>
