@@ -1,0 +1,19 @@
+#!/bin/sh
+# preinst script for daisy-pipeline2
+#
+
+USER=pipeline2
+DATA=/var/opt/daisy-pipeline2
+
+echo "installing now"
+
+# create ${USER} group
+if ! getent group ${USER} >/dev/null; then
+    groupadd --system ${USER}
+fi
+
+# create ${USER} user
+if ! getent passwd ${USER} >/dev/null; then
+    adduser --system --gid ${USER} --home ${DATA} --no-create-home --shell /sbin/nologin \
+        --comment "DAISY Pipeline 2 server" ${USER}
+fi
