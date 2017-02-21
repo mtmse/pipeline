@@ -319,6 +319,12 @@ init() {
     # On Debian, read predefined settings from file  
     if [ -e $DIRNAME/debian.cfg ]; then
         . $DIRNAME/debian.cfg
+    elif [ -e $DIRNAME/redhat.cfg ] ; then
+    	. $DIRNAME/redhat.cfg
+    	locateHome
+    	locateBase
+    	locateData
+    	locateConfig
     else
         # Locate the Karaf home directory
         locateHome
