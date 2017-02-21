@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <version>1.9.17-SNAPSHOT</version>
+    <version>1.10.1-SNAPSHOT</version>
     <relativePath>../../maven/parent/</relativePath>
   </parent>
 
@@ -71,6 +71,14 @@
     <dependency>
       <groupId>org.daisy.libs</groupId>
       <artifactId>saxon-he</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!--
+        for framework-core (FIXME: move elsewhere)
+    -->
+    <dependency>
+      <groupId>org.daisy.libs</groupId>
+      <artifactId>jing</artifactId>
       <scope>runtime</scope>
     </dependency>
     <!--

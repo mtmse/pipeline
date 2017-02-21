@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.daisy.pipeline.modules.braille</groupId>
     <artifactId>braille-modules-parent</artifactId>
-    <version>1.9.17-SNAPSHOT</version>
+    <version>1.10.1-SNAPSHOT</version>
     <relativePath>../../../maven/parent/</relativePath>
   </parent>
 
@@ -101,7 +101,8 @@
               xproc.step;filter:="(name={http://www.daisy.org/ns/2008/pef}pef2text)",
               xproc.step;filter:="(name={http://www.daisy.org/ns/2008/pef}text2pef)",
               xproc.step;filter:="(name={http://www.daisy.org/ns/2008/pef}validate)",
-              xpath.function;filter:="(name={http://www.daisy.org/ns/2008/pef}encode)"
+              xpath.function;filter:="(name={http://www.daisy.org/ns/2008/pef}encode)",
+              xpath.function;filter:="(name={http://www.daisy.org/ns/2008/pef}decode)"
             </Require-Capability>
           </instructions>
         </configuration>
