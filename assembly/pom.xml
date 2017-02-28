@@ -2705,11 +2705,8 @@
                 <fileEncoding>utf-8</fileEncoding>
               </preremoveScriptlet>
               <postremoveScriptlet>
-                <script>
-				  rm -rf /opt/daisy-pipeline2
-				  rm -rf ${pipeline.log}
-				  rm -f /tmp/dp2key.txt
-                </script>
+                <scriptFile>src/main/rpm/scripts/postUninstall</scriptFile>
+                <fileEncoding>utf-8</fileEncoding>
               </postremoveScriptlet>
             </configuration>
           </plugin>
