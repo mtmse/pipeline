@@ -24,7 +24,6 @@ task printVersion() << {
 }
 
 artifactoryRpm {
-	distributionDir = "target/rpm/pipeline2/RPMS/x86_64"
 	packageName = "pipeline2"
 }
 
