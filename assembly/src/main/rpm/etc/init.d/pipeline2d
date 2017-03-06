@@ -21,46 +21,50 @@ daemon_pid() {
 }
 
 start() {
-          PID=$(daemon_pid)
-          if [[ $PID ]] ; then
-            echo "$PROG is already running"
-            RETVAL=1
-          else
-            echo -n "Starting $PROG"
-            cd $DIR
-            if [[ "$USER" == "pipeline2" ]] ; then
-				daemon $PROG $OPTIONS >$LOG 2>&1 &
-			else
-				daemon --user pipeline2 $PROG $OPTIONS >$LOG 2>&1 &
-			fi
-            RETVAL=$?
-          fi
-          echo
-          return $RETVAL
+      PID=$(daemon_pid)
+      if [[ $PID ]] ; then
+        echo "$PROG is already running"
+        RETVAL=1
+      else
+        echo -n "Starting $PROG"
+        cd $DIR
+        if [[ "$USER" == "pipeline2" ]] ; then
+			daemon $PROG $OPTIONS >$LOG 2>&1 &
+		else
+			daemon --user pipeline2 $PROG $OPTIONS >$LOG 2>&1 &
+		fi
+        RETVAL=$?
+      fi
+      echo
+      return $RETVAL
 }
 
 stop() {
-          PID=$(pidof -x /etc/init.d/pipeline2d)
-          if [[ $PID ]] ; then
-	    	echo -n "Stopping $PROG"
-            kill -15 $(daemon_pid)
-            RETVAL=$?
-          else
-            echo "$PROG not running"
-            RETVAL=1
-          fi
-          echo
-          return $RETVAL
+      PID=$(pidof -x /etc/init.d/pipeline2d)
+      if [[ $PID ]] ; then
+        echo -n "Stopping $PROG"
+        kill -15 $(daemon_pid)
+        sleep 1
+        if [[ $(daemon_pid) ]] ; then
+          kill -9 $(daemon_pid)
+        fi
+        RETVAL=$?
+      else
+        echo "$PROG not running"
+        RETVAL=1
+      fi
+      echo
+      return $RETVAL
 }
 
 status() {
-         pid=$(daemon_pid)
-         if [ -n "$pid" ] ; then
-          	echo "Pipeline2 daemon is running with pid: $pid"
-         else
-           	echo "Pipeline2 daemon is not running"
-          	exit 3
-         fi
+     pid=$(daemon_pid)
+     if [ -n "$pid" ] ; then
+      	echo "Pipeline2 daemon is running with pid: $pid"
+     else
+       	echo "Pipeline2 daemon is not running"
+      	exit 3
+     fi
 }
 
 # See how we were called.
