@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'se.mtm.gradle:gradle-artifactory-rpm-plugin:1.0.22'
+        classpath 'se.mtm.gradle:gradle-artifactory-rpm-plugin:1.0.23'
     }
 }
 
