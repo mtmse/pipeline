@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo --- Stopping Pipeline2 ---
-service=pipeline2d
+service=pipeline2
 if [[ $(ps -ef | grep -v grep | grep $service | wc -l) > 0 ]] ; then
   service $service stop
 fi
