@@ -2702,8 +2702,8 @@
                   <filemode>0755</filemode>
                   <sources>
 				    <source>
-				      <location>${project.basedir}/src/main/rpm/etc/init.d/pipeline2d</location>
-				      <destination>pipeline2d</destination>
+				      <location>${project.basedir}/src/main/rpm/etc/init.d/pipeline2</location>
+				      <destination>pipeline2</destination>
 				    </source>
 				  </sources>
                 </mapping>
