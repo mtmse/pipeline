@@ -247,7 +247,7 @@ $(addsuffix /.maven-snapshot-dependencies,assembly $(MAVEN_MODULES)) : %/.maven-
 .INTERMEDIATE : $(addsuffix /.gradle-dependencies-to-test,assembly $(MAVEN_MODULES))
 $(addsuffix /.gradle-dependencies-to-test,assembly $(MAVEN_MODULES)) : %/.gradle-dependencies-to-test : %/.gradle-dependencies-to-install
 	for module in $$(cat $$(dirname $@)/.gradle-snapshot-dependencies); do \
-		if [ -e $$module/.maven-to-test ]; then \
+		if [ -e $$module/.gradle-to-test ]; then \
 			echo $$module; \
 		fi \
 	done > $@
@@ -264,6 +264,8 @@ $(addsuffix /.gradle-dependencies-to-install,assembly $(MAVEN_MODULES)) : %/.gra
 		   [[ ! -e "$$dest/maven-metadata-local.xml" ]] || \
 		   [[ -n $$(find $$module/{build.gradle,gradle.properties,src} -newer "$$dest/maven-metadata-local.xml" 2>/dev/null) ]]; then \
 			touch $$module/.gradle-to-{install,test}; \
+		elif [[ -n $$(find $$module/test -newer "$$dest/maven-metadata-local.xml" 2>/dev/null) ]]; then \
+			touch $$module/.gradle-to-test; \
 		fi \
 	done
 	for module in $$(cat $<); do \
@@ -383,6 +385,22 @@ clean : cache
 gradle-clean :
 	$(GRADLE) clean
 
+.PHONY : website
+website : compile
+	cd website && make MVN_OPTS="--settings '$(CURDIR)/settings.xml' -Dworkspace='$(MVN_WORKSPACE)' -Dcache='$(MVN_CACHE)'"
+
+.PHONY : serve-website
+serve-website : compile
+	cd website && make MVN_OPTS="--settings '$(CURDIR)/settings.xml' -Dworkspace='$(MVN_WORKSPACE)' -Dcache='$(MVN_CACHE)'" serve
+
+.PHONY : publish-website
+publish-website : compile
+	cd website && make MVN_OPTS="--settings '$(CURDIR)/settings.xml' -Dworkspace='$(MVN_WORKSPACE)' -Dcache='$(MVN_CACHE)'" publish
+
+.PHONY : clean-website
+clean-website :
+	cd website && make MVN_OPTS="--settings '$(CURDIR)/settings.xml' -Dworkspace='$(MVN_WORKSPACE)' -Dcache='$(MVN_CACHE)'" clean
+
 .PHONY : help
 help :
 	echo "make all:"                                                                                       >&2
@@ -409,6 +427,8 @@ help :
 	echo "	Incrementally compile code and run GUI locally"                                                >&2
 	echo "make run-webui:"                                                                                 >&2
 	echo "	Compile and run web UI locally"                                                                >&2
+	echo "make website:"                                                                                   >&2
+	echo "	Build the website"                                                                             >&2
 
 ifndef VERBOSE
 .SILENT:
