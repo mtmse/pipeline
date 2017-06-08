@@ -54,23 +54,17 @@ The tree below shows the structure of the project:
   - [xspec-maven-plugin](https://github.com/daisy/xspec-maven-plugin)
 - [webui](https://github.com/daisy/pipeline-webui)
 
-## Building
 ### Building on CentOS/Redhat
-Install pcregrep (if not already installed):`sudo yum install pcre`
-
-Install libxml (libxml needs to be at least version 20900, if already installed check version with `xmllint --version`):
-
-`wget ftp://xmlsoft.org/libxml2/libxml2-2.9.0-1.src.prm`
-
-`rpmbuild --rebuild libxml2-2.9.0-1.src.rpm`
-
-`rpm -i --force /path/to/rpm/libxml2-2.9.0-1.rpm`
-
-Run make: `make dist-rpm`
+- Install pcregrep (if not already installed): `yum install pcre-tools` or `yum install pcre`
+- Install libxml (libxml needs to be at least version 20900, if already installed check version with `xmllint --version`):
+- `wget ftp://xmlsoft.org/libxml2/libxml2-2.9.0-1.src.prm`
+- `rpmbuild --rebuild libxml2-2.9.0-1.src.rpm`
+- `rpm -i --force /path/to/rpm/libxml2-2.9.0-1.rpm`
+- Run make: `make dist-rpm`
 
 ## Issues
 
-This is also a common issue tracker for the Pipeline. Use the individual issue trackers of the sub-projects listed above for issues that clearly belong to a specific sub-project. Before creating a new issue, please first check the [existing issues](https://github.com/search?utf8=%E2%9C%93&q=repo%3Adaisy%2Fpipeline-assembly+repo%3Adaisy%2Fpipeline-framework+repo%3Adaisy%2Fpipeline-scripts+repo%3Adaisy%2Fpipeline-build-utils+repo%3Adaisy%2Fpipeline-webui+repo%3Asnaekobbi%2Fbraille-css+repo%3Asnaekobbi%2FjStyleParser+repo%3Abrailleapps%2Fdotify.api+repo%3Abrailleapps%2Fdotify.formatter.impl&type=Issues&ref=searchresults).
+This is also a common issue tracker for the Pipeline. Use the individual issue trackers of the sub-projects listed above for issues that clearly belong to a specific sub-project. Before creating a new issue, please first check the [existing open issues](https://github.com/search?l=&q=is%3Aopen++repo%3Adaisy%2Fpipeline++repo%3Adaisy%2Fpipeline-assembly++repo%3Adaisy%2Fpipeline-build-utils++repo%3Adaisy%2Fpipeline-cli-go++repo%3Adaisy%2Fpipeline-clientlib-go++repo%3Adaisy%2Fpipeline-clientlib-java++repo%3Adaisy%2Fpipeline-framework++repo%3Adaisy%2Fpipeline-gui++repo%3Adaisy%2Fpipeline-it++repo%3Adaisy%2Fpipeline-mod-audio++repo%3Adaisy%2Fpipeline-mod-braille++repo%3Adaisy%2Fpipeline-mod-nlp++repo%3Adaisy%2Fpipeline-mod-tts++repo%3Adaisy%2Fpipeline-modules-common++repo%3Adaisy%2Fpipeline-samples++repo%3Adaisy%2Fpipeline-scripts++repo%3Adaisy%2Fpipeline-scripts-utils++repo%3Adaisy%2Fpipeline-updater++repo%3Adaisy%2Fpipeline-updater-gui++repo%3Adaisy%2Fpipeline-webui++repo%3Adaisy%2Fbraille-css++repo%3Adaisy%2FjStyleParser++repo%3Adaisy%2Fosgi-libs++repo%3Adaisy%2Fxmlcalabash1++repo%3Adaisy%2Fxprocspec++repo%3Adaisy%2Fxproc-maven-plugin++repo%3Adaisy%2Fxspec-maven-plugin++repo%3Asnaekobbi%2Fpipeline-mod-braille&ref=advsearch&type=Issues&utf8=%E2%9C%93).
 
 ## Website
 
