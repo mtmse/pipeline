@@ -130,6 +130,8 @@ public class FileToOBFLStep extends DefaultStep {
 			addOption(_splitterMax, params);
 			addOption(_identifier, params);
 			
+			params.putAll(parameters);
+			
 			RuntimeValue rv = getOption(_dotifyOptions);
 			if (rv!=null) {
 				for (Feature f : query(rv.getString())) {
@@ -140,7 +142,10 @@ public class FileToOBFLStep extends DefaultStep {
 				}
 			}
 			
-			params.putAll(parameters);
+			params.put("page-width", toInt(params.remove("cols"))+toInt(params.get("inner-margin"))+toInt(params.get("outer-margin")));
+			params.put("page-height", toInt(params.remove("rows")));
+			params.put("row-spacing", 1+(toInt(params.remove("rowgap"))/4d));
+			
 			String locale = getOption(_locale, Locale.getDefault().toString());
 			String outputFormat = getOption(_format, "obfl");
 			InputStream resultStream = convert(inputFile, outputFormat, locale, params);
@@ -152,6 +157,10 @@ public class FileToOBFLStep extends DefaultStep {
 			logger.error("dotify:file-to-obfl failed", e);
 			throw new XProcException(step.getNode(), e);
 		}
+	}
+	
+	private static int toInt(Object v) {
+		return v==null?0:Integer.parseInt(v.toString());
 	}
 	
 	private void addOption(QName opt, Map<String, Object> params) {
