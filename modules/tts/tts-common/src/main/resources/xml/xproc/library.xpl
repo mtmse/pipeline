@@ -4,6 +4,5 @@
     <p:import href="get-tts-annotations.xpl"/>
     <p:import href="get-tts-lexicons.xpl"/>
     <p:import href="isolate-skippable.xpl"/>
-    <p:import href="ssml-to-audio.xpl"/>
 
 </p:library>

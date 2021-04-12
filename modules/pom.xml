@@ -59,6 +59,7 @@
     <module>tts/css-speech</module>
     <module>tts/dtbook-tts</module>
     <module>tts/epub3-tts</module>
+    <module>tts/ssml-to-audio</module>
     <module>tts/text-to-ssml</module>
     <module>tts/tts-common</module>
     <module>tts/tts-adapters/tts-adapter-espeak</module>
@@ -67,6 +68,7 @@
     <module>tts/tts-adapters/tts-adapter-sapinative</module>
     <module>tts/tts-adapters/tts-adapter-qfrency</module>
     <module>tts/tts-adapters/tts-adapter-google</module>
+    <module>tts/tts-adapters/tts-adapter-cereproc</module>
     <module>tts/zedai-to-ssml</module>
     <module>tts/mathml-to-ssml</module>
     <module>braille/common-utils</module>

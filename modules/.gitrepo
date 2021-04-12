@@ -4,8 +4,9 @@
 ; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:daisy/pipeline-modules.git
-	branch = master
-	commit = aec26b7fbcf3f72681e85e4807b98112c59cb505
-	parent = 348fc493bfe2c59f69b66cc5dfa1f2f368abfbdf
-	cmdver = 0.3.1
+	remote = git@github.com:carl-textalk/pipeline-modules.git
+	branch = cereproc-wip-charsub
+	commit = 325c1c140bfc2bd6b3ebfa799aa05aa19b67f485
+	parent = 958cedfce58e388325ef235111b6e34e54d74f8e
+	cmdver = 0.4.3
+	method = merge
