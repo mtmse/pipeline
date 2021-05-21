@@ -691,18 +691,9 @@
                     </p:input>
                 </px:epub3-add-mediaoverlays>
 
-                <p:xslt name="handle-list" px:message="TEXTALK><Performing list xslt">
-                    <p:input port="stylesheet">
-                        <p:document href="handle-list-item.xsl"/>
-                    </p:input>
-                    <p:input port="parameters">
-                        <p:empty/>
-                    </p:input>
-                </p:xslt>
-
-
             </p:when>
             <p:when test="$sentence-detection='true'" px:message="Performing sentence detection">
+
                 <!--
                     perform sentence detection
                 -->
@@ -729,6 +720,17 @@
                         <p:pipe step="fix-pagenum" port="in-memory"/>
                     </p:input>
                 </px:fileset-load>
+
+                <px:message message="TEXTALK: HANDLE LIST" severity="WARNING"/>
+                <p:xslt name="handle-list">
+                    <p:input port="stylesheet">
+                        <p:document href="handle-list-item.xsl"/>
+                    </p:input>
+                    <p:input port="parameters">
+                        <p:empty/>
+                    </p:input>
+                </p:xslt>
+
                 <p:for-each name="sentence-detection" px:progress="1">
                     <p:output port="result"/>
                     <px:html-break-detect name="break-detect">
@@ -779,6 +781,15 @@
                         <p:pipe step="fix-pagenum" port="fileset"/>
                     </p:input>
                 </p:identity>
+                <px:message message="TEXTALK: HANDLE LIST" severity="WARNING"/>
+                <p:xslt name="handle-list">
+                    <p:input port="stylesheet">
+                        <p:document href="handle-list-item.xsl"/>
+                    </p:input>
+                    <p:input port="parameters">
+                        <p:empty/>
+                    </p:input>
+                </p:xslt>
             </p:otherwise>
         </p:choose>
     </p:group>
