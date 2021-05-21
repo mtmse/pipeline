@@ -567,7 +567,6 @@
             </p:input>
         </px:fileset-update>
     </p:group>
-
     <!--
         Perform TTS or only sentence detection or nothing
     -->
@@ -691,6 +690,17 @@
                         <p:pipe step="mo" port="result.in-memory"/>
                     </p:input>
                 </px:epub3-add-mediaoverlays>
+
+                <p:xslt name="handle-list" px:message="TEXTALK><Performing list xslt">
+                    <p:input port="stylesheet">
+                        <p:document href="handle-list-item.xsl"/>
+                    </p:input>
+                    <p:input port="parameters">
+                        <p:empty/>
+                    </p:input>
+                </p:xslt>
+
+
             </p:when>
             <p:when test="$sentence-detection='true'" px:message="Performing sentence detection">
                 <!--
