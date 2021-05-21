@@ -692,6 +692,17 @@
                 </px:epub3-add-mediaoverlays>
 
             </p:when>
+            <p:when test="1=1">
+            <px:message message="TEXTALK: HANDLE LIST" severity="WARNING"/>
+            <p:xslt name="handle-list">
+                <p:input port="stylesheet">
+                    <p:document href="handle-list-item.xsl"/>
+                </p:input>
+                <p:input port="parameters">
+                    <p:empty/>
+                </p:input>
+            </p:xslt>
+            </p:when>
             <p:when test="$sentence-detection='true'" px:message="Performing sentence detection">
 
                 <!--
@@ -721,18 +732,10 @@
                     </p:input>
                 </px:fileset-load>
 
-                <px:message message="TEXTALK: HANDLE LIST" severity="WARNING"/>
-                <p:xslt name="handle-list">
-                    <p:input port="stylesheet">
-                        <p:document href="handle-list-item.xsl"/>
-                    </p:input>
-                    <p:input port="parameters">
-                        <p:empty/>
-                    </p:input>
-                </p:xslt>
 
                 <p:for-each name="sentence-detection" px:progress="1">
                     <p:output port="result"/>
+
                     <px:html-break-detect name="break-detect">
                         <p:with-option name="id-prefix" select="concat(p:iteration-position(),'-')"/>
                         <p:with-option name="sentence-attr" select="if ($sentence-class!='') then 'class' else ''"/>

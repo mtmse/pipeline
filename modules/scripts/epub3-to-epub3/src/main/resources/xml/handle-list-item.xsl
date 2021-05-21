@@ -30,8 +30,8 @@
 						<xsl:attribute name="style" select="'display:inline'"/>
 						<xsl:choose>
 							<xsl:when test="$list-style-type!='none'">
-								<xsl:number value="count(preceding-sibling::*) + 1" format="1"/>
-								<xsl:text>. </xsl:text>
+<!--								<xsl:number value="count(preceding-sibling::*) + 1" format="1"/>-->
+								<xsl:text>TEXTALK-LIST-ITEM. </xsl:text>
 							</xsl:when>
 <!--							<xsl:when test="$list-style-type='decimal'">-->
 <!--								<xsl:number value="count(preceding-sibling::*) + 1" format="1"/>-->
