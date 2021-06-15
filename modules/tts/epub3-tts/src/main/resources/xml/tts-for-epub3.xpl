@@ -253,24 +253,6 @@
                     new-name="span" new-namespace="http://www.w3.org/1999/xhtml"/>
         </p:group>
 
-        <p:xslt>
-          <p:documentation>
-            Prepare HTML document for TTS:
-            - Add numbers to ordered lists.
-          </p:documentation>
-          <!--
-          <p:input port="source">
-            <p:pipe step="main" port="content.in"/>
-          </p:input>
-          -->
-          <p:input port="stylesheet">
-            <p:document href="prepare-for-tts.xsl"/>
-          </p:input>
-          <p:input port="parameters">
-            <p:empty/>
-          </p:input>
-        </p:xslt>
-
         <px:html-break-detect name="lexing" px:progress="1/2">
           <p:with-option name="id-prefix" select="concat($anti-conflict-prefix, p:iteration-position(), '-')"/>
         </px:html-break-detect>
@@ -318,6 +300,19 @@
             synthesize step, but not for synchronization on word level.)
           </p:documentation>
         </px:html-unwrap-words>
+
+        <p:xslt>
+          <p:documentation>
+            Prepare HTML document for TTS:
+            - Add numbers to ordered lists.
+          </p:documentation>
+          <p:input port="stylesheet">
+            <p:document href="prepare-for-tts.xsl"/>
+          </p:input>
+          <p:input port="parameters">
+             <p:empty/>
+          </p:input>
+        </p:xslt>
         <px:remove-empty-lic name="remove-empty-lic">
           <!-- Remove all the empty lic tags -->
         </px:remove-empty-lic>
