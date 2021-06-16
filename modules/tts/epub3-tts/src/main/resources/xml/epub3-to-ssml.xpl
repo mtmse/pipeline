@@ -35,11 +35,6 @@
         px:get-tts-lexicons
       </p:documentation>
     </p:import>
-    <p:import href="prepare-for-tts.xpl">
-      <p:documentation>
-        px:prepare-for-tts
-      </p:documentation>
-    </p:import>
 
     <px:get-tts-lexicons name="user-lexicons">
       <p:input port="config">
@@ -64,10 +59,6 @@
 	<p:empty/>
       </p:input>
     </p:xslt>
-
-    <px:prepare-for-tts>
-        <!-- Add extra line numbers to ordered lists -->
-    </px:prepare-for-tts>
 
     <px:text-to-ssml name="ssml-gen">
       <p:input port="fileset.in">
