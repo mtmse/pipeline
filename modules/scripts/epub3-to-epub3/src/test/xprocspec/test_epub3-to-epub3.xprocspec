@@ -178,6 +178,22 @@
 									</a>
 								</li>
 							</ul>
+                            <ol>
+                                <li>Det var en mörk och ljuv kväll.</li>
+                                <li><span>Solen hade inte riktigt gått ner i horizonten.</span>
+                                    <ol>
+                                        <li>Fåglarna hade tystnat och satt lugnt i trädet och väntade.</li>
+                                        <li>Poolens vatten krusade i lugn bris.</li>
+                                        <li>Vattnet var kallt men inbjudande.</li>
+                                    </ol>
+                                </li>
+                                <li>I förd badbyxor blötte han fötterna i det mörka vattnet.</li>
+                            </ol>
+                            <ul class="none">
+                                <li>Huuu, här var det kallt.</li>
+                                <li>Långsamt satte han sig ner, vattnet gick upp till naveln.</li>
+                                <li>Efter många djupa andetag tog han mod och lade sig ned.</li>
+                            </ul>
 						</body>
 					</html>
 				</x:document>

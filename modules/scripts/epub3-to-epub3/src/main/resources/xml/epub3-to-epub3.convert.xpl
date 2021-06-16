@@ -153,7 +153,7 @@
             pxi:add-legal-doc
         </p:documentation>
     </p:import>
-    <p:import href="prepare-for-tts.xpl">
+    <p:import href="../../../../../../tts/epub3-tts/src/main/resources/xml/prepare-for-tts.xpl">
         <p:documentation>
             px:prepare-for-tts
         </p:documentation>
