@@ -130,7 +130,6 @@
       px:html-break-detect
       px:html-unwrap-words
       px:remove-empty-lic
-      px:prepare-for-tts
     </p:documentation>
   </p:import>
   <p:import href="http://www.daisy.org/pipeline/modules/css-speech/library.xpl">
@@ -147,7 +146,7 @@
   </p:import>
   <p:import href="prepare-for-tts.xpl">
     <p:documentation>
-      pxi:prepare-for-tts
+      px:prepare-for-tts
     </p:documentation>
   </p:import>
 

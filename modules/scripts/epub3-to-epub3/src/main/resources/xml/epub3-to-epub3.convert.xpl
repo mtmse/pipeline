@@ -153,6 +153,11 @@
             pxi:add-legal-doc
         </p:documentation>
     </p:import>
+    <p:import href="prepare-for-tts.xpl">
+        <p:documentation>
+            px:prepare-for-tts
+        </p:documentation>
+    </p:import>
 
     <p:variable name="default-stylesheet" select="resolve-uri('../css/default.css')">
         <p:inline>
@@ -761,6 +766,9 @@
                     <px:html-unwrap-words>
                         <!-- only keep the sentences, not the words -->
                     </px:html-unwrap-words>
+                    <px:prepare-for-tts>
+                        <!-- Add extra line numbers to ordered lists -->
+                    </px:prepare-for-tts>
                     <px:remove-empty-lic>
                         <!-- Remove all the empty lic tags -->
                     </px:remove-empty-lic>
