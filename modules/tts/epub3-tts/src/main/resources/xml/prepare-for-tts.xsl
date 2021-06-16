@@ -18,7 +18,7 @@
             <xsl:copy-of select="@*" />
             <xsl:for-each select="./html:li">
                 <xsl:variable name="number" select="concat($parentNumber, position(), '.')"/>
-                <li><xsl:copy-of select="@*" /><xsl:value-of select="$number"/> Intressant
+                <li><xsl:copy-of select="@*" /><xsl:value-of select="$number"/>
                     <xsl:apply-templates select="node()">
                         <xsl:with-param name="parentNumber" select="$number"/>
                     </xsl:apply-templates>
