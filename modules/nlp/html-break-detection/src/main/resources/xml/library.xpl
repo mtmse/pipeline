@@ -84,4 +84,21 @@
     <p:delete match="html:span[@class = 'lic' and normalize-space(.) = '']"/>
   </p:declare-step>
 
+  <p:declare-step type="px:prepare-for-tts">
+    <p:documentation>
+        Prepare HTML document for TTS:
+        - Add numbers to ordered lists.
+    </p:documentation>
+    <p:input port="source" primary="true"/>
+    <p:output port="result" primary="true"/>
+    <p:xslt>
+      <p:input port="stylesheet">
+        <p:document href="prepare-for-tts.xsl"></p:document>
+      </p:input>
+      <p:input port="parameters">
+        <p:empty/>
+      </p:input>
+    </p:xslt>
+  </p:declare-step>
+
 </p:library>

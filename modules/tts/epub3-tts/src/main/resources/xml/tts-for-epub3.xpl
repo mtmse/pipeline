@@ -129,6 +129,8 @@
     <p:documentation>
       px:html-break-detect
       px:html-unwrap-words
+      px:remove-empty-lic
+      px:prepare-for-tts
     </p:documentation>
   </p:import>
   <p:import href="http://www.daisy.org/pipeline/modules/css-speech/library.xpl">
@@ -300,19 +302,9 @@
             synthesize step, but not for synchronization on word level.)
           </p:documentation>
         </px:html-unwrap-words>
-
-        <p:xslt>
-          <p:documentation>
-            Prepare HTML document for TTS:
-            - Add numbers to ordered lists.
-          </p:documentation>
-          <p:input port="stylesheet">
-            <p:document href="prepare-for-tts.xsl"/>
-          </p:input>
-          <p:input port="parameters">
-             <p:empty/>
-          </p:input>
-        </p:xslt>
+        <px:prepare-for-tts>
+          <!-- Add extra line numbers to ordered lists -->
+        </px:prepare-for-tts>
         <px:remove-empty-lic name="remove-empty-lic">
           <!-- Remove all the empty lic tags -->
         </px:remove-empty-lic>
