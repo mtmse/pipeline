@@ -145,6 +145,11 @@
       px:fileset-update
     </p:documentation>
   </p:import>
+  <p:import href="prepare-for-tts.xpl">
+    <p:documentation>
+      pxi:prepare-for-tts
+    </p:documentation>
+  </p:import>
 
   <p:variable name="fileset-base" select="base-uri(/*)">
     <p:pipe step="main" port="source.fileset"/>
